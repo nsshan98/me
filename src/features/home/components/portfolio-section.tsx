@@ -1,12 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import {
-  ChevronLeft,
-  ChevronRight,
-  ImageIcon,
-  ExternalLink,
-  Github,
-} from "lucide-react";
+import { ImageIcon, ExternalLink, Github } from "lucide-react";
 
 const projects = [
   {
@@ -43,7 +37,9 @@ export default function PortfolioSection() {
         {/* Header */}
         <div className="flex items-center justify-center mb-12">
           <div>
-            <h2 className="text-white text-5xl align-center font-bold">PROJECTS</h2>
+            <h2 className="text-white text-5xl align-center font-bold">
+              PROJECTS
+            </h2>
           </div>
         </div>
 

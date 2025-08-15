@@ -96,7 +96,7 @@ const ExperienceSection = () => {
             Professional Experience
           </h2>
           <p className="text-lg text-slate-300 max-w-2xl mx-auto">
-            My journey through various roles and the impact I've made along the
+            My journey through various roles and the impact I&apos;ve made along the
             way
           </p>
         </div>
@@ -106,7 +106,7 @@ const ExperienceSection = () => {
           <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 via-cyan-500 to-teal-500 opacity-50 hidden md:block" />
 
           <div className="space-y-8">
-            {experiences.map((experience, index) => (
+            {experiences.map((experience) => (
               <div key={experience.id} className="relative">
                 {/* Timeline dot - desktop only */}
                 <div className="absolute left-6 top-8 w-4 h-4 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 border-4 border-slate-800 shadow-lg hidden md:block z-10" />

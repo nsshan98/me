@@ -91,7 +91,7 @@ const BlogSection = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {featuredArticles.map((article, index) => (
               <Card
-                key={article.title}
+                key={index}
                 className="group hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 hover:-translate-y-2 overflow-hidden"
               >
                 <div className="relative overflow-hidden">
@@ -150,7 +150,7 @@ const BlogSection = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {regularArticles.map((article, index) => (
               <Card
-                key={article.title}
+                key={index}
                 className="group hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1"
               >
                 <div className="relative overflow-hidden">

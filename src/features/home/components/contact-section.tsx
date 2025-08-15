@@ -9,6 +9,7 @@ import {
   MessageCircle,
   Calendar,
 } from "lucide-react";
+import Link from "next/link";
 
 const ContactSection = () => {
   const contactMethods = [
@@ -59,7 +60,7 @@ const ContactSection = () => {
             Get In Touch
           </h2>
           <p className="text-lg text-slate-300 max-w-2xl mx-auto">
-            Ready to start a project together? I'd love to hear from you. Let's
+            Ready to start a project together? I&apos;d love to hear from you. Let&apos;s
             create something amazing!
           </p>
         </div>
@@ -70,17 +71,17 @@ const ContactSection = () => {
             <Card className="p-8 bg-slate-700/50 border-slate-600 backdrop-blur-sm hover:bg-slate-700/70 hover:shadow-xl hover:shadow-cyan-500/10 transition-all duration-300">
               <CardHeader className="p-0 mb-6">
                 <CardTitle className="text-2xl text-white">
-                  Let's Connect
+                  Let&apos;s Connect
                 </CardTitle>
                 <p className="text-slate-300">
-                  I'm always open to discussing new opportunities, interesting
+                  I&apos;m always open to discussing new opportunities, interesting
                   projects, or just having a chat about technology.
                 </p>
               </CardHeader>
               <CardContent className="p-0 space-y-6">
                 {contactMethods.map((method, index) => (
                   <div
-                    key={method.title}
+                    key={index}
                     className="flex items-start gap-4 group"
                   >
                     <div
@@ -103,12 +104,12 @@ const ContactSection = () => {
                           </Badge>
                         )}
                       </div>
-                      <a
+                      <Link
                         href={method.href}
                         className="text-cyan-400 hover:text-cyan-300 transition-colors font-medium"
                       >
                         {method.value}
-                      </a>
+                      </Link>
                       <p className="text-sm text-slate-400 mt-1">
                         {method.description}
                       </p>
@@ -137,13 +138,13 @@ const ContactSection = () => {
                       className="border-slate-600 text-slate-300 hover:bg-cyan-500 hover:text-white hover:border-cyan-500 transition-all duration-200 bg-transparent"
                       asChild
                     >
-                      <a
+                      <Link
                         href={social.url}
                         target="_blank"
                         rel="noopener noreferrer"
                       >
                         {social.name}
-                      </a>
+                      </Link>
                     </Button>
                   ))}
                 </div>
@@ -158,7 +159,7 @@ const ContactSection = () => {
                 Send a Message
               </CardTitle>
               <p className="text-slate-300">
-                Fill out the form below and I'll get back to you as soon as
+                Fill out the form below and I&apos;ll get back to you as soon as
                 possible.
               </p>
             </CardHeader>
@@ -259,7 +260,7 @@ const ContactSection = () => {
             <Calendar className="w-12 h-12 mx-auto mb-4 text-blue-400 group-hover:scale-110 transition-transform" />
             <h3 className="font-semibold text-white mb-2">Book Meeting</h3>
             <p className="text-sm text-slate-300 mb-4">
-              Let's discuss your project in detail
+              Let&apos;s discuss your project in detail
             </p>
             <Button
               variant="outline"
@@ -282,7 +283,7 @@ const ContactSection = () => {
               className="border-slate-600 text-slate-300 hover:bg-teal-500 hover:text-white hover:border-teal-500 bg-transparent"
               asChild
             >
-              <a href="mailto:jane@example.com">Send Email</a>
+              <Link href="mailto:jane@example.com">Send Email</Link>
             </Button>
           </Card>
         </div>

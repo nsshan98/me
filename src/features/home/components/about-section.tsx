@@ -61,9 +61,9 @@ const AboutSection = () => {
                     feel great to use.
                   </p>
                   <p>
-                    When I'm not coding, you'll find me contributing to open
+                    When I&apos;m not coding, you&apos;ll find me contributing to open
                     source projects, mentoring junior developers, or exploring
-                    the latest trends in technology. I'm always eager to learn
+                    the latest trends in technology. I&apos;m always eager to learn
                     and share knowledge with the community.
                   </p>
                 </div>
@@ -106,7 +106,7 @@ const AboutSection = () => {
                 </h3>
                 <div className="grid grid-cols-2 gap-6">
                   {stats.map((stat, index) => (
-                    <div key={stat.label} className="text-center group">
+                    <div key={index} className="text-center group">
                       <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-cyan-500/10 mb-3 group-hover:bg-cyan-500/20 group-hover:scale-110 transition-all duration-300">
                         <stat.icon className="w-8 h-8 text-cyan-400 group-hover:text-cyan-300" />
                       </div>

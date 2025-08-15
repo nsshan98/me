@@ -35,7 +35,7 @@ const HeroSection = () => {
             </h1>
 
             <p className="text-xl md:text-2xl text-slate-300 mb-8 max-w-3xl mx-auto leading-relaxed">
-              I'm <span className="text-cyan-400 font-semibold">Jane Doe</span>,
+              I&apos;m <span className="text-cyan-400 font-semibold">Jane Doe</span>,
               a passionate developer who creates
               <span className="text-blue-400 font-semibold">
                 {" "}
