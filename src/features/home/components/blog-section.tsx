@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Calendar, Clock, ArrowRight, BookOpen } from "lucide-react";
+import Image from "next/image";
 
 const articles = [
   {
@@ -94,9 +95,11 @@ const BlogSection = () => {
                 className="group hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 hover:-translate-y-2 overflow-hidden"
               >
                 <div className="relative overflow-hidden">
-                  <img
+                  <Image
                     src={article.image}
                     alt={article.title}
+                    width={500}
+                    height={500}
                     className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
                   />
                   <div className="absolute top-4 left-4">
@@ -151,9 +154,11 @@ const BlogSection = () => {
                 className="group hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1"
               >
                 <div className="relative overflow-hidden">
-                  <img
+                  <Image
                     src={article.image}
                     alt={article.title}
+                    width={500}
+                    height={500}
                     className="w-full h-32 object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                   <div className="absolute top-3 left-3">
