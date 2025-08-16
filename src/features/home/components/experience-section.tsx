@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { MapPin, Calendar, ExternalLink } from "lucide-react";
+import Link from "next/link";
 
 interface Experience {
   id: string;
@@ -25,61 +26,32 @@ const ExperienceSection = () => {
   const experiences: Experience[] = [
     {
       id: "1",
-      position: "Senior Full Stack Developer",
-      company: "TechCorp Solutions",
-      location: "San Francisco, CA",
-      period: "2022 - Present",
+      position: "Frontend Developer",
+      company: "Miicon Solutions",
+      location: "22 RN Rd, Jashore",
+      period: "2024 - Present",
       current: true,
       description:
-        "Leading development of enterprise web applications and mentoring junior developers.",
+        "Crafting fast, responsive, and pixel-perfect web experiences with React, Next.js, and modern UI magic.",
       achievements: [
-        "Architected and developed a microservices-based e-commerce platform serving 100K+ users",
-        "Improved application performance by 40% through code optimization and caching strategies",
-        "Led a team of 5 developers and established best practices for code quality and testing",
+        "Built and deployed responsive, high-performance websites using React.js, Next.js, and Material-UI, improving load times by up to 40%.",
+        "Integrated REST APIs endpoints, ensuring seamless data flow between frontend and backend",
+        "Implemented state management with TanStack Query to handle complex UI interactions and real-time updates.",
+        "Enhanced SEO and performance with Next.js static generation (SSG) and server-side rendering (SSR).",
+        "Collaborated with designers via Figma to translate UI/UX designs into pixel-perfect components.",
       ],
       technologies: [
         "React",
-        "Node.js",
+        "Next.js",
         "TypeScript",
-        "PostgreSQL",
-        "AWS",
-        "Docker",
+        "Tailwind CSS",
+        "Material-UI (MUI)",
+        "TanStack Query (React Query)",
+        "Git",
+        "GitHub",
+        "REST API",
       ],
-      companyUrl: "https://techcorp.com",
-    },
-    {
-      id: "2",
-      position: "Full Stack Developer",
-      company: "InnovateLab",
-      location: "Remote",
-      period: "2020 - 2022",
-      current: false,
-      description:
-        "Developed and maintained multiple client projects using modern web technologies.",
-      achievements: [
-        "Built 15+ responsive web applications for various clients across different industries",
-        "Implemented CI/CD pipelines reducing deployment time by 60%",
-        "Collaborated with UX/UI designers to create pixel-perfect user interfaces",
-      ],
-      technologies: ["React", "Vue.js", "Python", "Django", "MySQL", "Azure"],
-      companyUrl: "https://innovatelab.com",
-    },
-    {
-      id: "3",
-      position: "Frontend Developer",
-      company: "StartupXYZ",
-      location: "Austin, TX",
-      period: "2018 - 2020",
-      current: false,
-      description:
-        "Focused on creating engaging user experiences and implementing responsive designs.",
-      achievements: [
-        "Developed the company's main product interface used by 50K+ daily active users",
-        "Reduced page load times by 50% through optimization and lazy loading techniques",
-        "Implemented accessibility standards achieving WCAG 2.1 AA compliance",
-      ],
-      technologies: ["JavaScript", "React", "SASS", "Webpack", "Jest", "Figma"],
-      companyUrl: "https://startupxyz.com",
+      companyUrl: "https://www.miiconsolutions.com",
     },
   ];
 
@@ -96,8 +68,8 @@ const ExperienceSection = () => {
             Professional Experience
           </h2>
           <p className="text-lg text-slate-300 max-w-2xl mx-auto">
-            My journey through various roles and the impact I&apos;ve made along the
-            way
+            My journey through various roles and the impact I&apos;ve made along
+            the way
           </p>
         </div>
 
@@ -125,7 +97,9 @@ const ExperienceSection = () => {
                                 {experience.company}
                               </span>
                               {experience.companyUrl && (
-                                <ExternalLink className="w-4 h-4 text-slate-400 hover:text-blue-400 transition-colors cursor-pointer" />
+                                <Link href={experience.companyUrl} target="_blank" rel="noopener noreferrer">
+                                  <ExternalLink className="w-4 h-4 text-slate-400 hover:text-blue-400 transition-colors cursor-pointer" />
+                                </Link>
                               )}
                             </div>
                             <div className="flex items-center gap-1 text-slate-400 text-sm">
@@ -202,14 +176,14 @@ const ExperienceSection = () => {
         </div>
 
         {/* Call to action */}
-        <div className="text-center mt-16">
+        {/* <div className="text-center mt-16">
           <div className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-full border border-blue-400/30 backdrop-blur-sm">
             <span className="text-sm font-medium text-blue-300">
               Want to know more about my experience?
             </span>
             <ExternalLink className="w-4 h-4 text-blue-400" />
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );
