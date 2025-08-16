@@ -7,11 +7,11 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 
 const menuItems = [
-  { label: "Home", href: "#home" },
-  { label: "About", href: "#about" },
-  { label: "Services", href: "#services" },
-  { label: "Portfolio", href: "#portfolio" },
-  { label: "Contact", href: "#contact" },
+  { label: "Home", sectionId: "home" },
+  { label: "About", sectionId: "about-me" },
+  { label: "Services", sectionId: "services" },
+  { label: "Portfolio", sectionId: "portfolio" },
+  { label: "Contact", sectionId: "contact" },
 ];
 
 export default function Navbar() {
@@ -49,7 +49,7 @@ export default function Navbar() {
             {menuItems.map((item, index) => (
               <li key={index}>
                 <Link
-                  href={item.href}
+                  href={`#${item.sectionId}`}
                   className={cn(
                     "relative font-medium text-amber-50 transition-all duration-300 ease-in-out  hover:text-black group",
                     isScrolled
@@ -119,7 +119,7 @@ export default function Navbar() {
             {menuItems.map((item, index) => (
               <Link
                 key={index}
-                href={item.href}
+                href={`#${item.sectionId}`}
                 className="text-muted-foreground hover:text-cyan-400 hover:bg-cyan-400/10 transition-all duration-300 py-3 px-4 rounded-lg border-b border-border/50 hover:border-cyan-400/30 last:border-b-0"
                 onClick={() => setIsMenuOpen(false)}
               >

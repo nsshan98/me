@@ -22,7 +22,7 @@ const AboutSection = () => {
   ];
 
   return (
-    <section className="relative min-h-screen py-20 px-4 bg-slate-800/50 backdrop-blur-sm overflow-hidden">
+    <section className="relative min-h-screen py-20 px-4 bg-slate-800/50 backdrop-blur-sm overflow-hidden" id="about-me">
       <div className="absolute inset-0 bg-gradient-to-br from-slate-800/30 via-slate-700/20 to-slate-900/40" />
       <div className="absolute top-20 left-10 w-72 h-72 bg-cyan-500/5 rounded-full blur-3xl animate-pulse" />
       <div className="absolute bottom-20 right-10 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl animate-pulse delay-1000" />

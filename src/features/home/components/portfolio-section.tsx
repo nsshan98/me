@@ -27,7 +27,7 @@ const projects = [
 
 export default function PortfolioSection() {
   return (
-    <section className="bg-slate-900/50 backdrop-blur-sm py-16 px-6 relative">
+    <section className="bg-slate-900/50 backdrop-blur-sm py-16 px-6 relative" id="portfolio">
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl animate-pulse" />
         <div className="absolute bottom-1/3 right-1/4 w-40 h-40 bg-cyan-500/10 rounded-full blur-3xl animate-pulse delay-1000" />

@@ -8,7 +8,7 @@ const HeroSection = () => {
     <div className="min-h-screen relative">
       <Navbar />
 
-      <section className="min-h-screen flex items-center justify-center py-20 px-4 bg-slate-800 relative overflow-hidden">
+      <section className="min-h-screen flex items-center justify-center py-20 px-4 bg-slate-800 relative overflow-hidden" id="home">
         <div className="absolute inset-0">
           <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-cyan-500/10 rounded-full blur-xl animate-pulse"></div>
           <div
