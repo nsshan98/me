@@ -7,7 +7,7 @@ import FooterSection from "@/features/home/components/footer-section";
 import HeroSection from "@/features/home/components/hero-section";
 import PortfolioSection from "@/features/home/components/portfolio-section";
 import SkillsSection from "@/features/home/components/skills-section";
-import TestSection from "@/features/home/components/test";
+
 
 export default function Home() {
   return (
@@ -24,8 +24,7 @@ export default function Home() {
       {/* Content with relative positioning */}
       <div className="relative z-10">
         <HeroSection />
-        {/* <AboutSection /> */}
-        <TestSection/>
+        <AboutSection />
         <PortfolioSection />
         <SkillsSection />
         <ExperienceSection />
