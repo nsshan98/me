@@ -1,165 +1,213 @@
-"use client"
+"use client";
 
-const skillsData = {
-  Featured: ["React", "Next.js", "JavaScript", "TypeScript", "Tailwind CSS", "Node.js"],
-  Languages: ["JavaScript", "TypeScript", "HTML5", "CSS3", "Python"],
-  Frontend: ["React", "Next.js", "Vue.js", "Svelte", "Tailwind CSS", "Framer Motion", "Material-UI", "Shadcn/ui"],
-  Backend: ["Node.js", "Express", "MongoDB", "PostgreSQL", "Firebase", "Prisma"],
-  "Tools & Workflow": ["Git", "GitHub", "VS Code", "Figma", "Vercel", "Netlify"],
-  "Cloud & DevOps": ["AWS", "Vercel", "Netlify", "Docker", "CI/CD"],
-}
+import { Card } from "@/components/ui/card";
+import { useEffect, useState } from "react";
+import {
+  Globe,
+  Palette,
+  Braces,
+  FileType,
+  Atom,
+  SquareCode,
+  Database,
+  Zap,
+  Layers,
+  Server,
+  GitBranch,
+  Package,
+  CloudLightningIcon as Lightning,
+  Container,
+  Figma,
+  FileCode2,
+  Layout,
+  Wind,
+  Workflow,
+  Shield,
+  Network,
+  Cloud,
+  DatabaseBackup,
+  Lock,
+} from "lucide-react";
 
-const categoryColors = {
-  Featured: {
-    gradient: "from-purple-500 to-pink-500",
-    shadow: "shadow-purple-500/25",
-    hover: "hover:shadow-purple-500/40 hover:from-purple-400 hover:to-pink-400",
-    text: "text-white",
+const skillCategories = [
+  {
+    title: "Core Frontend & Frameworks",
+    skills: [
+      { name: "HTML5", icon: Globe },
+      { name: "CSS3", icon: Palette },
+      { name: "JavaScript", icon: Braces },
+      { name: "TypeScript", icon: FileType },
+      { name: "React", icon: Atom },
+      { name: "Next.js", icon: SquareCode },
+      { name: "TanStack Query", icon: Database },
+      { name: "Material-UI", icon: Layers },
+      { name: "Shadcn/ui", icon: Layout },
+      { name: "Tailwind CSS", icon: Wind },
+    ],
   },
-  Languages: {
-    gradient: "from-blue-500 to-cyan-500",
-    shadow: "shadow-blue-500/25",
-    hover: "hover:shadow-blue-500/40 hover:from-blue-400 hover:to-cyan-400",
-    text: "text-white",
+  {
+    title: "Backend & APIs",
+    skills: [
+      { name: "Node.js", icon: Server },
+      { name: "Express.js", icon: Workflow },
+      { name: "Nest.js", icon: Shield },
+      { name: "RESTful APIs", icon: Network },
+      { name: "NextAuth.js", icon: Lock },
+    ],
   },
-  Frontend: {
-    gradient: "from-green-500 to-emerald-500",
-    shadow: "shadow-green-500/25",
-    hover: "hover:shadow-green-500/40 hover:from-green-400 hover:to-emerald-400",
-    text: "text-white",
+  {
+    title: "Tools & Technologies",
+    skills: [
+      { name: "Git & GitHub", icon: GitBranch },
+      { name: "Figma", icon: Figma },
+      { name: "Vercel", icon: Cloud },
+    ],
   },
-  Backend: {
-    gradient: "from-orange-500 to-red-500",
-    shadow: "shadow-orange-500/25",
-    hover: "hover:shadow-orange-500/40 hover:from-orange-400 hover:to-red-400",
-    text: "text-white",
+  {
+    title: "Databases & Cloud",
+    skills: [
+      { name: "MongoDB", icon: Database },
+      { name: "PostgreSQL", icon: DatabaseBackup },
+    ],
   },
-  "Tools & Workflow": {
-    gradient: "from-indigo-500 to-purple-500",
-    shadow: "shadow-indigo-500/25",
-    hover: "hover:shadow-indigo-500/40 hover:from-indigo-400 hover:to-purple-400",
-    text: "text-white",
+  {
+    title: "Databases & Cloud",
+    skills: [
+      { name: "MongoDB", icon: Database }, // database
+      { name: "PostgreSQL", icon: DatabaseBackup }, // backup = relational DB
+    ],
   },
-  "Cloud & DevOps": {
-    gradient: "from-teal-500 to-blue-500",
-    shadow: "shadow-teal-500/25",
-    hover: "hover:shadow-teal-500/40 hover:from-teal-400 hover:to-blue-400",
-    text: "text-white",
-  },
-}
-
-const skillIcons = {
-  React: "⚛️",
-  "Next.js": "▲",
-  JavaScript: "JS",
-  TypeScript: "TS",
-  "Tailwind CSS": "🎨",
-  "Node.js": "🟢",
-  HTML5: "🌐",
-  CSS3: "🎨",
-  Python: "🐍",
-  "Vue.js": "V",
-  Svelte: "🔥",
-  "Framer Motion": "🎬",
-  "Material-UI": "M",
-  "Shadcn/ui": "✨",
-  Express: "E",
-  MongoDB: "🍃",
-  PostgreSQL: "🐘",
-  Firebase: "🔥",
-  Prisma: "P",
-  Git: "📝",
-  GitHub: "🐙",
-  "VS Code": "💻",
-  Figma: "🎨",
-  Vercel: "▲",
-  Netlify: "🌐",
-  AWS: "☁️",
-  Docker: "🐳",
-  "CI/CD": "🔄",
-}
+];
 
 export default function SkillsSection() {
-  const categories = Object.keys(skillsData)
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    const section = document.getElementById("technical-skills");
+    if (section) observer.observe(section);
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <section className="min-h-screen bg-gradient-to-br from-slate-900 via-gray-900 to-black mx-auto px-4 py-20 relative overflow-hidden">
-      <div className="absolute inset-0">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-pink-500/10 rounded-full blur-3xl animate-pulse delay-2000"></div>
+    <section
+      id="technical-skills"
+      className="bg-slate-900/50 py-20 px-6 backdrop-blur-sm relative overflow-hidden"
+    >
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 left-10 w-32 h-32 bg-cyan-500/10 rounded-full blur-xl animate-pulse"></div>
+        <div className="absolute bottom-20 right-20 w-40 h-40 bg-blue-500/10 rounded-full blur-xl animate-pulse delay-1000"></div>
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
+        {/* Header */}
         <div className="text-center mb-16">
-          <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent mb-4 font-mono tracking-wider">
-            Skills
-          </h1>
-          <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full"></div>
+          <h2
+            className={`text-4xl md:text-5xl font-bold text-cyan-400 mb-4 transition-all duration-1000 ${
+              isVisible
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-10"
+            }`}
+          >
+            Technical Skills
+          </h2>
+          <p
+            className={`text-gray-300 text-lg max-w-3xl mx-auto transition-all duration-1000 delay-300 ${
+              isVisible
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-10"
+            }`}
+          >
+            A comprehensive overview of my technical expertise and proficiency
+            levels across different technologies and tools.
+          </p>
         </div>
 
         <div className="space-y-12">
-          {categories.map((category, categoryIndex) => {
-            const colors = categoryColors[category as keyof typeof categoryColors]
+          {skillCategories.map((category, categoryIndex) => (
+            <div key={category.title} className="space-y-6">
+              <h3
+                className={`text-2xl font-semibold text-white mb-6 transition-all duration-1000 ${
+                  isVisible
+                    ? "opacity-100 translate-x-0"
+                    : "opacity-0 -translate-x-10"
+                }`}
+                style={{ transitionDelay: `${categoryIndex * 200}ms` }}
+              >
+                {category.title}
+              </h3>
 
-            return (
-              <div key={category} className="space-y-6">
-                {/* Category Header */}
-                <div className="text-left">
-                  <h2 className="text-2xl md:text-3xl font-bold text-white mb-2 font-mono">{category}</h2>
-                </div>
-
-                {/* Skills Grid */}
-                <div className="flex flex-wrap gap-4">
-                  {skillsData[category as keyof typeof skillsData].map((skill, skillIndex) => (
-                    <div
-                      key={skill}
-                      className={`group relative bg-gradient-to-r ${colors.gradient} rounded-xl px-6 py-3 ${colors.shadow} ${colors.hover} transition-all duration-300 hover:scale-105 hover:-translate-y-1 cursor-pointer animate-fade-in-up`}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {category.skills.map((skill, skillIndex) => {
+                  const IconComponent = skill.icon;
+                  return (
+                    <Card
+                      key={skill.name}
+                      className={`bg-slate-800/80 border-slate-700 p-6 hover:bg-slate-700/80 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/20 group backdrop-blur-sm ${
+                        isVisible
+                          ? "opacity-100 translate-y-0"
+                          : "opacity-0 translate-y-10"
+                      }`}
                       style={{
-                        animationDelay: `${categoryIndex * 100 + skillIndex * 50}ms`,
-                        animationFillMode: "both",
+                        transitionDelay: `${
+                          categoryIndex * 200 + skillIndex * 100
+                        }ms`,
                       }}
                     >
-                      {/* Skill Content */}
-                      <div className="flex items-center gap-3">
-                        {/* Icon */}
-                        <span className="text-lg font-bold">
-                          {skillIcons[skill as keyof typeof skillIcons] || "⚡"}
-                        </span>
-
-                        {/* Skill Name */}
-                        <span className={`${colors.text} font-semibold text-sm md:text-base font-mono tracking-wide`}>
-                          {skill}
-                        </span>
+                      <div className="flex items-center gap-4">
+                        <div className="p-2 bg-cyan-500/20 rounded-lg group-hover:bg-cyan-500/30 transition-colors duration-300">
+                          <IconComponent className="w-6 h-6 text-cyan-400 group-hover:text-cyan-300 transition-colors duration-300" />
+                        </div>
+                        <h4 className="text-white font-medium text-lg group-hover:text-cyan-300 transition-colors duration-300">
+                          {skill.name}
+                        </h4>
                       </div>
-
-                      {/* Hover Glow Effect */}
-                      <div className="absolute inset-0 rounded-xl bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    </div>
-                  ))}
-                </div>
+                    </Card>
+                  );
+                })}
               </div>
-            )
-          })}
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-20 text-center">
+          <div
+            className={`inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 rounded-full border border-cyan-500/20 backdrop-blur-sm transition-all duration-1000 hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/20 ${
+              isVisible
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-10"
+            }`}
+            style={{ transitionDelay: "1200ms" }}
+          >
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
+              <span className="text-cyan-300 font-medium text-lg">
+                Forever curious, always evolving
+              </span>
+              <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse delay-500"></div>
+            </div>
+          </div>
+          <p
+            className={`text-gray-400 mt-4 text-sm transition-all duration-1000 delay-1000 ${
+              isVisible ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            Embracing the endless journey of discovery in the ever-expanding
+            digital universe
+          </p>
         </div>
       </div>
-
-      <style jsx>{`
-        @keyframes fade-in-up {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        
-        .animate-fade-in-up {
-          animation: fade-in-up 0.6s ease-out;
-        }
-      `}</style>
     </section>
-  )
+  );
 }
