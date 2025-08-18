@@ -83,7 +83,7 @@ export default function SkillsSection() {
   const categories = Object.keys(skillsData)
 
   return (
-    <section className="w-full min-h-screen bg-gradient-to-br from-slate-900 via-gray-900 to-black px-4 py-20 relative overflow-hidden">
+    <section className="min-h-screen bg-gradient-to-br from-slate-900 via-gray-900 to-black mx-auto px-4 py-20 relative overflow-hidden">
       <div className="absolute inset-0">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
@@ -141,25 +141,6 @@ export default function SkillsSection() {
               </div>
             )
           })}
-        </div>
-
-        <div className="mt-20 text-center">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-            {categories.map((category) => {
-              const colors = categoryColors[category as keyof typeof categoryColors]
-              const skillCount = skillsData[category as keyof typeof skillsData].length
-
-              return (
-                <div
-                  key={category}
-                  className={`bg-gradient-to-r ${colors.gradient} rounded-xl p-4 ${colors.shadow} hover:scale-105 transition-transform duration-300`}
-                >
-                  <div className="text-2xl font-bold text-white font-mono">{skillCount}</div>
-                  <div className="text-white/80 text-xs font-mono font-medium">{category}</div>
-                </div>
-              )
-            })}
-          </div>
         </div>
       </div>
 

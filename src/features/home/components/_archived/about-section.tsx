@@ -38,9 +38,9 @@ const AboutSection = () => {
           </p>
         </div>
 
-        <div className="">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
           {/* Personal Story */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <div className="space-y-6">
             <Card className="p-8 bg-slate-700/30 border-slate-600/30 backdrop-blur-sm hover:bg-slate-700/40 hover:shadow-2xl hover:shadow-cyan-500/10 transition-all duration-300">
               <CardContent className="p-0">
                 <h3 className="text-2xl font-semibold mb-4 text-white">
@@ -92,6 +92,49 @@ const AboutSection = () => {
                     <div className="w-2 h-2 bg-cyan-400 rounded-full"></div>
                     <p>Collaborating with talented teams and individuals</p>
                   </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Stats and Interests */}
+          <div className="space-y-6">
+            <Card className="p-8 bg-slate-700/30 border-slate-600/30 backdrop-blur-sm hover:bg-slate-700/40 hover:shadow-2xl hover:shadow-cyan-500/10 transition-all duration-300">
+              <CardContent className="p-0">
+                <h3 className="text-2xl font-semibold mb-6 text-white">
+                  By the Numbers
+                </h3>
+                <div className="grid grid-cols-2 gap-6">
+                  {stats.map((stat, index) => (
+                    <div key={index} className="text-center group">
+                      <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-cyan-500/10 mb-3 group-hover:bg-cyan-500/20 group-hover:scale-110 transition-all duration-300">
+                        <stat.icon className="w-8 h-8 text-cyan-400 group-hover:text-cyan-300" />
+                      </div>
+                      <div className="text-2xl font-bold text-white">
+                        {stat.value}
+                      </div>
+                      <div className="text-sm text-slate-400">{stat.label}</div>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="p-8 bg-slate-700/30 border-slate-600/30 backdrop-blur-sm hover:bg-slate-700/40 hover:shadow-2xl hover:shadow-cyan-500/10 transition-all duration-300">
+              <CardContent className="p-0">
+                <h3 className="text-2xl font-semibold mb-6 text-white">
+                  Current Interests
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {interests.map((interest) => (
+                    <Badge
+                      key={interest}
+                      variant="secondary"
+                      className="px-3 py-1 bg-slate-600/50 text-slate-200 border-slate-500/30 hover:bg-cyan-500/20 hover:text-cyan-300 hover:border-cyan-400/30 transition-all duration-300"
+                    >
+                      {interest}
+                    </Badge>
+                  ))}
                 </div>
               </CardContent>
             </Card>

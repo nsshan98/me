@@ -1,5 +1,5 @@
-import AboutSection from "@/features/home/components/about-section";
 // import BlogSection from "@/features/home/components/blog-section";
+import AboutSection from "@/features/home/components/about-section";
 import ContactSection from "@/features/home/components/contact-section";
 import EducationSection from "@/features/home/components/eduction-section";
 import ExperienceSection from "@/features/home/components/experience-section";
