@@ -51,9 +51,9 @@ export default function Navbar() {
                 <Link
                   href={`#${item.sectionId}`}
                   className={cn(
-                    "relative font-medium text-amber-50 transition-all duration-300 ease-in-out  hover:text-black group",
+                    "relative font-medium text-amber-50 transition-all duration-300 ease-in-out  hover:text-cyan-400 group",
                     isScrolled
-                      ? "text-sm text-white py-2 px-3 rounded-md hover:bg-accent"
+                      ? "text-sm text-white py-2 px-3 rounded-md hover:bg-accent hover:text-black"
                       : "text-base md:text-lg py-3 px-4"
                   )}
                   style={{

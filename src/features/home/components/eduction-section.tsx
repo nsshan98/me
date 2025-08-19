@@ -15,10 +15,10 @@ interface Education {
   location: string;
   period: string;
   gpa?: string;
-  description: string;
-  achievements: string[];
-  relevantCourses: string[];
-  institutionType: "university" | "college" | "bootcamp" | "certification";
+  description?: string;
+  achievements?: string[];
+  relevantCourses?: string[];
+  institutionType: "University" | "college" | "bootcamp" | "certification";
 }
 
 const EducationSection = () => {
@@ -26,81 +26,32 @@ const EducationSection = () => {
     {
       id: "1",
       degree: "Bachelor of Science in Computer Science",
-      institution: "Stanford University",
-      location: "Stanford, CA",
-      period: "2014 - 2018",
-      gpa: "3.8/4.0",
-      institutionType: "university",
-      description:
-        "Comprehensive computer science program with focus on software engineering, algorithms, and data structures.",
-      achievements: [
-        "Dean's List for 6 consecutive semesters",
-        "Outstanding Student in Computer Science Award 2018",
-        "President of Computer Science Student Association",
-        "Lead developer for university's student portal project",
-      ],
-      relevantCourses: [
-        "Data Structures & Algorithms",
-        "Software Engineering",
-        "Database Systems",
-        "Web Development",
-        "Machine Learning",
-        "Computer Networks",
-      ],
-    },
-    {
-      id: "2",
-      degree: "Full Stack Web Development Bootcamp",
-      institution: "General Assembly",
-      location: "San Francisco, CA",
-      period: "2018",
-      institutionType: "bootcamp",
-      description:
-        "Intensive 12-week program focused on modern web development technologies and best practices.",
-      achievements: [
-        "Top 5% of graduating class",
-        "Best Final Project Award",
-        "Completed 500+ hours of hands-on coding",
-        "Built 15+ full-stack applications",
-      ],
-      relevantCourses: [
-        "HTML5 & CSS3",
-        "JavaScript ES6+",
-        "React.js",
-        "Node.js",
-        "MongoDB",
-        "RESTful APIs",
-      ],
-    },
-    {
-      id: "3",
-      degree: "AWS Certified Solutions Architect",
-      institution: "Amazon Web Services",
-      location: "Online",
-      period: "2021",
-      institutionType: "certification",
-      description:
-        "Professional certification demonstrating expertise in designing distributed systems on AWS.",
-      achievements: [
-        "Passed with 85% score",
-        "Validated expertise in cloud architecture",
-        "Demonstrated knowledge of AWS services",
-        "Earned industry-recognized credential",
-      ],
-      relevantCourses: [
-        "EC2 & VPC",
-        "S3 & CloudFront",
-        "RDS & DynamoDB",
-        "Lambda & API Gateway",
-        "IAM & Security",
-        "CloudFormation",
-      ],
+      institution: "The People's University of Bangladesh",
+      location: "Dhaka, Bangladesh",
+      period: "2020 - 2023",
+      institutionType: "University",
+      // description:
+      //   "Comprehensive computer science program with focus on software engineering, algorithms, and data structures.",
+      // achievements: [
+      //   "Dean's List for 6 consecutive semesters",
+      //   "Outstanding Student in Computer Science Award 2018",
+      //   "President of Computer Science Student Association",
+      //   "Lead developer for university's student portal project",
+      // ],
+      // relevantCourses: [
+      //   "Data Structures & Algorithms",
+      //   "Software Engineering",
+      //   "Database Systems",
+      //   "Web Development",
+      //   "Machine Learning",
+      //   "Computer Networks",
+      // ],
     },
   ];
 
   const getInstitutionIcon = (type: Education["institutionType"]) => {
     switch (type) {
-      case "university":
+      case "University":
       case "college":
         return GraduationCap;
       case "bootcamp":
@@ -114,7 +65,7 @@ const EducationSection = () => {
 
   const getInstitutionBadgeColor = (type: Education["institutionType"]) => {
     switch (type) {
-      case "university":
+      case "University":
       case "college":
         return "bg-blue-500/10 text-blue-400 border-blue-500/20";
       case "bootcamp":
@@ -127,7 +78,7 @@ const EducationSection = () => {
   };
 
   return (
-    <section className="py-20 px-6 md:px-8 bg-slate-900/50 backdrop-blur-sm relative overflow-hidden">
+    <section className="py-10 px-6 md:px-8 bg-slate-900/50 backdrop-blur-sm relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-slate-800/20 via-transparent to-slate-700/20" />
       <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-500/5 rounded-full blur-3xl animate-pulse" />
       <div className="absolute bottom-1/3 right-1/3 w-48 h-48 bg-cyan-500/5 rounded-full blur-3xl animate-pulse delay-1000" />
@@ -211,9 +162,9 @@ const EducationSection = () => {
                     </div>
                   </CardHeader>
 
-                  <CardContent>
+                  {/* <CardContent>
                     <div className="grid md:grid-cols-2 gap-6">
-                      {/* Achievements */}
+                      Achievements
                       <div>
                         <h4 className="font-semibold text-white mb-3 flex items-center gap-2">
                           <Award className="w-4 h-4 text-cyan-400" />
@@ -234,7 +185,7 @@ const EducationSection = () => {
                         </ul>
                       </div>
 
-                      {/* Relevant Courses */}
+                      Relevant Courses
                       <div>
                         <h4 className="font-semibold text-white mb-3 flex items-center gap-2">
                           <BookOpen className="w-4 h-4 text-cyan-400" />
@@ -253,7 +204,7 @@ const EducationSection = () => {
                         </div>
                       </div>
                     </div>
-                  </CardContent>
+                  </CardContent> */}
                 </Card>
               </div>
             );
