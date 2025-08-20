@@ -16,23 +16,23 @@ const ContactSection = () => {
     {
       icon: Mail,
       title: "Email",
-      value: "jane@example.com",
+      value: "n.sakibnss@gmail.com",
       description: "Best for detailed inquiries",
-      href: "mailto:jane@example.com",
+      href: "mailto:n.sakibnss@gmail.com",
       primary: true,
     },
     {
       icon: Phone,
       title: "Phone",
-      value: "+1 (555) 123-4567",
+      value: "+880 1923 248529",
       description: "Available Mon-Fri, 9AM-6PM EST",
-      href: "tel:+15551234567",
+      href: "tel:+8801923248529",
       primary: false,
     },
     {
       icon: MapPin,
       title: "Location",
-      value: "San Francisco, CA",
+      value: "Jashore, Khulna, Bangladesh",
       description: "Open to remote opportunities",
       href: "#",
       primary: false,
@@ -40,10 +40,8 @@ const ContactSection = () => {
   ];
 
   const socialLinks = [
-    { name: "LinkedIn", url: "#", color: "bg-blue-600" },
-    { name: "GitHub", url: "#", color: "bg-gray-800" },
-    { name: "Twitter", url: "#", color: "bg-blue-400" },
-    { name: "Discord", url: "#", color: "bg-indigo-600" },
+    { name: "LinkedIn", url: "https://www.linkedin.com/in/nsshan98/", color: "bg-blue-600" },
+    { name: "GitHub", url: "https://github.com/nsshan98/", color: "bg-gray-800" },
   ];
 
   return (
@@ -219,7 +217,7 @@ const ContactSection = () => {
                     Message *
                   </label>
                   <textarea
-                    rows={6}
+                    rows={4}
                     className="w-full px-4 py-3 rounded-lg border border-slate-600 bg-slate-800/50 text-white placeholder-slate-400 focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-colors resize-none"
                     placeholder="Tell me about your project or just say hello..."
                     required

@@ -65,13 +65,6 @@ const skillCategories = [
       { name: "PostgreSQL", icon: DatabaseBackup },
     ],
   },
-  {
-    title: "Databases & Cloud",
-    skills: [
-      { name: "MongoDB", icon: Database }, // database
-      { name: "PostgreSQL", icon: DatabaseBackup }, // backup = relational DB
-    ],
-  },
 ];
 
 export default function SkillsSection() {

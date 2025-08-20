@@ -2,7 +2,7 @@
 
 import Navbar from "@/components/shared/navbar"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Github, Linkedin, Instagram, Twitter } from "lucide-react"
+import { Github, Linkedin, } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -43,7 +43,7 @@ const HeroSection = () => {
               </div>
 
               <div className="space-y-4">
-                <h1 className="text-5xl lg:text-6xl font-bold text-white leading-tight">I'm Nazmus Sakib</h1>
+                <h1 className="text-5xl lg:text-6xl font-bold text-white leading-tight">I&apos;m Nazmus Sakib</h1>
                 <p className="text-xl lg:text-2xl text-slate-300">
                   I am into{" "}
                   <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent font-semibold">
@@ -53,7 +53,7 @@ const HeroSection = () => {
               </div>
 
               <p className="text-lg text-slate-400 leading-relaxed max-w-lg">
-                I focus on developing user-friendly web applications that meet the client's requirements, with attention
+                I focus on developing user-friendly web applications that meet the client&apos;s requirements, with attention
                 to detail, scalability, and performance.
               </p>
 

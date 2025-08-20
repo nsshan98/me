@@ -1,33 +1,28 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { ImageIcon, ExternalLink, Github } from "lucide-react";
+import { ExternalLink} from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
 const projects = [
   {
     id: 1,
-    title: "E-commerce Platform",
+    title: "Bikroy+",
+    subTitle: "Simplifying POS, sales, and order management.",
     description:
       "Full-stack e-commerce solution with payment integration, inventory management, and admin dashboard.",
-    technologies: ["React", "Node.js", "MongoDB", "Stripe"],
-    image: "/placeholder.svg?height=200&width=400",
-    externalLink: "https://example.com/ecommerce",
-    githubLink: "https://github.com/example/ecommerce",
-  },
-  {
-    id: 2,
-    title: "Task Management App",
-    description:
-      "Collaborative task management application with real-time updates and team collaboration features.",
-    technologies: ["Next.js", "TypeScript", "PostgreSQL", "Socket.io"],
-    image: "/placeholder.svg?height=200&width=400",
-    externalLink: "https://example.com/task-management",
-    githubLink: "https://github.com/example/task-management",
+    technologies: ["Next.js", " React Hook Form", "Zod", "Material UI"],
+    image: "/bikroy+.png",
+    externalLink: "https://bikroyplus.com/",
   },
 ];
 
 export default function PortfolioSection() {
   return (
-    <section className="bg-slate-900/50 backdrop-blur-sm py-16 px-6 relative" id="portfolio">
+    <section
+      className="bg-slate-900/50 backdrop-blur-sm py-16 px-6 relative"
+      id="portfolio"
+    >
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl animate-pulse" />
         <div className="absolute bottom-1/3 right-1/4 w-40 h-40 bg-cyan-500/10 rounded-full blur-3xl animate-pulse delay-1000" />
@@ -44,18 +39,24 @@ export default function PortfolioSection() {
         </div>
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-1 gap-8 max-w-5xl mx-auto">
           {projects.map((project) => (
             <div
               key={project.id}
               className="bg-slate-800/80 backdrop-blur-sm rounded-lg overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-blue-500/20 hover:scale-105 transition-all duration-300 group border border-slate-700/50 hover:border-blue-500/30"
             >
               {/* Project Image Placeholder */}
-              <div className="h-48 bg-slate-700/50 flex items-center justify-center border-b border-slate-600/50 relative overflow-hidden">
+              <div className="h-60 bg-slate-700/50 flex items-center justify-center border-b border-slate-600/50 relative overflow-hidden">
                 {/* Default state */}
-                <div className="flex flex-col items-center text-slate-500 group-hover:opacity-0 transition-opacity duration-300">
-                  <ImageIcon className="h-12 w-12 mb-2" />
-                  <span className="text-sm">Project Preview</span>
+                <div className="flex flex-col items-center text-slate-500 transition-opacity duration-300">
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    layout="fill"
+                    objectFit="cover"
+                    className="w-full h-full object-cover"
+                    priority
+                  />
                 </div>
 
                 {/* Hover overlay */}
@@ -71,13 +72,9 @@ export default function PortfolioSection() {
                       size="icon"
                       className="bg-white/90 hover:bg-white text-gray-800 h-8 w-8"
                     >
-                      <ExternalLink className="h-4 w-4" />
-                    </Button>
-                    <Button
-                      size="icon"
-                      className="bg-white/90 hover:bg-white text-gray-800 h-8 w-8"
-                    >
-                      <Github className="h-4 w-4" />
+                      <Link href={project.externalLink} target="_blank">
+                        <ExternalLink className="h-4 w-4" />
+                      </Link>
                     </Button>
                   </div>
                 </div>
@@ -85,9 +82,12 @@ export default function PortfolioSection() {
 
               {/* Project Info */}
               <div className="bg-slate-800/90 p-6">
-                <h3 className="text-white text-xl font-semibold mb-3">
+                <p className="text-white text-2xl font-semibold mb-2">
                   {project.title}
-                </h3>
+                </p>
+                <p className="text-white text-sm font-medium mb-3">
+                  {project.subTitle}
+                </p>
                 <p className="text-slate-300 text-sm leading-relaxed mb-4">
                   {project.description}
                 </p>

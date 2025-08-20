@@ -1,4 +1,3 @@
-// import BlogSection from "@/features/home/components/blog-section";
 import AboutSection from "@/features/home/components/about-section";
 import ContactSection from "@/features/home/components/contact-section";
 import EducationSection from "@/features/home/components/eduction-section";
@@ -7,6 +6,7 @@ import FooterSection from "@/features/home/components/footer-section";
 import HeroSection from "@/features/home/components/hero-section";
 import PortfolioSection from "@/features/home/components/portfolio-section";
 import SkillsSection from "@/features/home/components/skills-section";
+
 
 
 export default function Home() {
@@ -25,8 +25,8 @@ export default function Home() {
       <div className="relative z-10">
         <HeroSection />
         <AboutSection />
-        <PortfolioSection />
         <SkillsSection />
+        <PortfolioSection />
         <ExperienceSection />
         <EducationSection />
         <ContactSection />
