@@ -14,15 +14,19 @@ import {
   Calendar,
 } from "lucide-react";
 import Link from "next/link";
-import { useFormStatus } from "react-dom";
-import { toast } from "sonner";
 
 const ContactSection = () => {
-  const [formData, setFormData] = useState({
+  // Keep your original keys, and add the form field keys you're using.
+  const [formData, setFormData] = useState<{ [key: string]: string }>({
+    // original keys you had
     name: "",
     email: "",
     subject: "",
     message: "",
+    // fields used by your inputs
+    first_name: "",
+    last_name: "",
+    user_email: "",
   });
 
   const [status, setStatus] = useState<null | string>(null);
@@ -56,51 +60,88 @@ const ContactSection = () => {
   ];
 
   const socialLinks = [
-    { name: "LinkedIn", url: "https://www.linkedin.com/in/nsshan98/", color: "bg-blue-600" },
-    { name: "GitHub", url: "https://github.com/nsshan98/", color: "bg-gray-800" },
+    {
+      name: "LinkedIn",
+      url: "https://www.linkedin.com/in/nsshan98/",
+      color: "bg-blue-600",
+    },
+    {
+      name: "GitHub",
+      url: "https://github.com/nsshan98/",
+      color: "bg-gray-800",
+    },
   ];
 
- const handleSubmit = async (e: React.FormEvent) => {
+  // Added a generic change handler that works with all your inputs by "name"
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
-    try {
-      // Send to YOU
-      // await emailjs.send(
-      //   "your_service_id",
-      //   "your_template_to_me",
-      //   {
-      //     user_name: formData.name,
-      //     user_email: formData.email,
-      //     subject: formData.subject,
-      //     message: formData.message,
-      //   },
-      //   "your_public_key"
-      // );
+    // Build the values that your EmailJS templates expect
+    // - name: use original "name" if set, else combine first + last
+    const combinedName =
+      formData.name?.trim() ||
+      `${formData.first_name || ""} ${formData.last_name || ""}`.trim();
 
-      // Auto-reply to USER
+    // - email: use original "email" if set, else use user_email from the input
+    const userEmail = (formData.email || formData.user_email || "").trim();
+
+    try {
+      // 1️⃣ Send to YOU — your owner template MUST have a fixed "To email" in the EmailJS dashboard
       await emailjs.send(
         process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
-  process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID_OWNER!, // Template for you
         {
-          user_name: formData.name,
-          user_email: formData.email, // recipient is the user
+          from_name: combinedName,
+          user_email: userEmail, // lets you use {{user_email}} in the email body (and set Reply-To in template)
+          subject: formData.subject,
+          message: formData.message,
         },
         process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
       );
 
-      toast("✅ Message sent successfully!");
-      setFormData({ name: "", email: "", subject: "", message: "" });
+      // 2️⃣ Auto reply to USER — your auto-reply template MUST have "To email" = {{user_email}}
+      await emailjs.send(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID_USER!, // Template for user
+        {
+          to_name: combinedName,
+          user_email: userEmail, // required so {{user_email}} resolves
+          subject: formData.subject, // optional if you use it in auto-reply
+        },
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+      );
+
+      setStatus("✅ Message sent successfully!");
+      // Reset all fields you use
+      setFormData({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+        first_name: "",
+        last_name: "",
+        user_email: "",
+      });
     } catch (error) {
-      console.error("FAILED...", error);
-      toast("❌ Something went wrong. Try again.");
+      console.log(error);
+      setStatus("❌ Failed to send message. Please try again.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <section className="relative min-h-screen py-20 px-4 bg-slate-800/50 backdrop-blur-sm" id="contact">
+    <section
+      className="relative min-h-screen py-20 px-4 bg-slate-800/50 backdrop-blur-sm"
+      id="contact"
+    >
       {/* Background effects */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl animate-pulse"></div>
@@ -114,8 +155,8 @@ const ContactSection = () => {
             Get In Touch
           </h2>
           <p className="text-lg text-slate-300 max-w-2xl mx-auto">
-            Ready to start a project together? I&apos;d love to hear from you. Let&apos;s
-            create something amazing!
+            Ready to start a project together? I&apos;d love to hear from you.
+            Let&apos;s create something amazing!
           </p>
         </div>
 
@@ -129,8 +170,8 @@ const ContactSection = () => {
                   Let&apos;s Connect
                 </CardTitle>
                 <p className="text-slate-300">
-                  I&apos;m always open to discussing new opportunities, interesting
-                  projects, or just having a chat about technology.
+                  I&apos;m always open to discussing new opportunities,
+                  interesting projects, or just having a chat about technology.
                 </p>
               </CardHeader>
               <CardContent className="p-0 space-y-6">
@@ -147,9 +188,13 @@ const ContactSection = () => {
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-1">
-                        <h3 className="font-semibold text-white">{method.title}</h3>
+                        <h3 className="font-semibold text-white">
+                          {method.title}
+                        </h3>
                         {method.primary && (
-                          <Badge className="text-xs bg-cyan-500 text-white">Primary</Badge>
+                          <Badge className="text-xs bg-cyan-500 text-white">
+                            Primary
+                          </Badge>
                         )}
                       </div>
                       <Link
@@ -158,7 +203,9 @@ const ContactSection = () => {
                       >
                         {method.value}
                       </Link>
-                      <p className="text-sm text-slate-400 mt-1">{method.description}</p>
+                      <p className="text-sm text-slate-400 mt-1">
+                        {method.description}
+                      </p>
                     </div>
                   </div>
                 ))}
@@ -168,8 +215,12 @@ const ContactSection = () => {
             {/* Social links */}
             <Card className="p-8 bg-slate-700/50 border-slate-600 backdrop-blur-sm hover:bg-slate-700/70 hover:shadow-xl hover:shadow-cyan-500/10 transition-all duration-300">
               <CardHeader className="p-0 mb-6">
-                <CardTitle className="text-xl text-white">Find Me Online</CardTitle>
-                <p className="text-slate-300 text-sm">Connect with me on social platforms</p>
+                <CardTitle className="text-xl text-white">
+                  Find Me Online
+                </CardTitle>
+                <p className="text-slate-300 text-sm">
+                  Connect with me on social platforms
+                </p>
               </CardHeader>
               <CardContent className="p-0">
                 <div className="flex flex-wrap gap-3">
@@ -181,7 +232,11 @@ const ContactSection = () => {
                       className="border-slate-600 text-slate-300 hover:bg-cyan-500 hover:text-white hover:border-cyan-500 transition-all duration-200 bg-transparent"
                       asChild
                     >
-                      <Link href={social.url} target="_blank" rel="noopener noreferrer">
+                      <Link
+                        href={social.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
                         {social.name}
                       </Link>
                     </Button>
@@ -194,9 +249,12 @@ const ContactSection = () => {
           {/* Contact Form */}
           <Card className="p-8 bg-slate-700/50 border-slate-600 backdrop-blur-sm hover:bg-slate-700/70 hover:shadow-xl hover:shadow-cyan-500/10 transition-all duration-300">
             <CardHeader className="p-0 mb-6">
-              <CardTitle className="text-2xl text-white">Send a Message</CardTitle>
+              <CardTitle className="text-2xl text-white">
+                Send a Message
+              </CardTitle>
               <p className="text-slate-300">
-                Fill out the form below and I&apos;ll get back to you as soon as possible.
+                Fill out the form below and I&apos;ll get back to you as soon as
+                possible.
               </p>
             </CardHeader>
             <CardContent className="p-0">
@@ -209,6 +267,8 @@ const ContactSection = () => {
                     <input
                       type="text"
                       name="first_name"
+                      value={formData.first_name}
+                      onChange={handleChange}
                       className="w-full px-4 py-3 rounded-lg border border-slate-600 bg-slate-800/50 text-white placeholder-slate-400 focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-colors"
                       placeholder="John"
                       required
@@ -221,6 +281,8 @@ const ContactSection = () => {
                     <input
                       type="text"
                       name="last_name"
+                      value={formData.last_name}
+                      onChange={handleChange}
                       className="w-full px-4 py-3 rounded-lg border border-slate-600 bg-slate-800/50 text-white placeholder-slate-400 focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-colors"
                       placeholder="Doe"
                       required
@@ -235,6 +297,8 @@ const ContactSection = () => {
                   <input
                     type="email"
                     name="user_email"
+                    value={formData.user_email}
+                    onChange={handleChange}
                     className="w-full px-4 py-3 rounded-lg border border-slate-600 bg-slate-800/50 text-white placeholder-slate-400 focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-colors"
                     placeholder="john@example.com"
                     required
@@ -248,6 +312,8 @@ const ContactSection = () => {
                   <input
                     type="text"
                     name="subject"
+                    value={formData.subject}
+                    onChange={handleChange}
                     className="w-full px-4 py-3 rounded-lg border border-slate-600 bg-slate-800/50 text-white placeholder-slate-400 focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-colors"
                     placeholder="Project Inquiry"
                     required
@@ -260,6 +326,8 @@ const ContactSection = () => {
                   </label>
                   <textarea
                     name="message"
+                    value={formData.message}
+                    onChange={handleChange}
                     rows={4}
                     className="w-full px-4 py-3 rounded-lg border border-slate-600 bg-slate-800/50 text-white placeholder-slate-400 focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-colors resize-none"
                     placeholder="Tell me about your project or just say hello..."
@@ -267,12 +335,20 @@ const ContactSection = () => {
                   ></textarea>
                 </div>
 
-                <Button disabled={loading} type="submit" size="lg" className="w-full bg-cyan-500 hover:bg-cyan-600 text-white">
-                  <Send className="w-5 h-5 mr-2" />
-                  Send Message
+                <Button
+                  disabled={loading}
+                  type="submit"
+                  size="lg"
+                  className="w-full bg-cyan-500 hover:bg-cyan-600 text-white"
+                >
+                  {loading ? "Sending Email..." : (<><Send className="w-5 h-5 mr-2" /> Send Email</>)}
                 </Button>
 
-                {status && <p className="text-center text-sm mt-4 text-cyan-400">{status}</p>}
+                {status && (
+                  <p className="text-center text-sm mt-4 text-cyan-400">
+                    {status}
+                  </p>
+                )}
               </form>
             </CardContent>
           </Card>
@@ -283,7 +359,9 @@ const ContactSection = () => {
           <Card className="p-6 text-center bg-slate-700/50 border-slate-600 backdrop-blur-sm hover:bg-slate-700/70 hover:shadow-xl hover:shadow-cyan-500/10 transition-all duration-300 group">
             <MessageCircle className="w-12 h-12 mx-auto mb-4 text-cyan-400 group-hover:scale-110 transition-transform" />
             <h3 className="font-semibold text-white mb-2">Quick Chat</h3>
-            <p className="text-sm text-slate-300 mb-4">Need a quick consultation?</p>
+            <p className="text-sm text-slate-300 mb-4">
+              Need a quick consultation?
+            </p>
             <Button
               variant="outline"
               size="sm"
@@ -296,7 +374,9 @@ const ContactSection = () => {
           <Card className="p-6 text-center bg-slate-700/50 border-slate-600 backdrop-blur-sm hover:bg-slate-700/70 hover:shadow-xl hover:shadow-cyan-500/10 transition-all duration-300 group">
             <Calendar className="w-12 h-12 mx-auto mb-4 text-blue-400 group-hover:scale-110 transition-transform" />
             <h3 className="font-semibold text-white mb-2">Book Meeting</h3>
-            <p className="text-sm text-slate-300 mb-4">Let&apos;s discuss your project in detail</p>
+            <p className="text-sm text-slate-300 mb-4">
+              Let&apos;s discuss your project in detail
+            </p>
             <Button
               variant="outline"
               size="sm"
@@ -309,7 +389,9 @@ const ContactSection = () => {
           <Card className="p-6 text-center bg-slate-700/50 border-slate-600 backdrop-blur-sm hover:bg-slate-700/70 hover:shadow-xl hover:shadow-cyan-500/10 transition-all duration-300 group">
             <Mail className="w-12 h-12 mx-auto mb-4 text-teal-400 group-hover:scale-110 transition-transform" />
             <h3 className="font-semibold text-white mb-2">Email Direct</h3>
-            <p className="text-sm text-slate-300 mb-4">Prefer email? Send directly</p>
+            <p className="text-sm text-slate-300 mb-4">
+              Prefer email? Send directly
+            </p>
             <Button
               variant="outline"
               size="sm"

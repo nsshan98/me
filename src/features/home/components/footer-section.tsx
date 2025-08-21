@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { Github, Linkedin, Mail, Twitter, Heart, ArrowUp, Coffee } from "lucide-react";
+import { Heart, ArrowUp, Coffee } from "lucide-react";
 
 const FooterSection = () => {
 
