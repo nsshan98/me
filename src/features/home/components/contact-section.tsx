@@ -14,11 +14,19 @@ import {
   Calendar,
 } from "lucide-react";
 import Link from "next/link";
+import { useFormStatus } from "react-dom";
+import { toast } from "sonner";
 
 const ContactSection = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+
   const [status, setStatus] = useState<null | string>(null);
-  console.log(status);
-  
+  const [loading, setLoading] = useState(false);
 
   const contactMethods = [
     {
@@ -52,35 +60,43 @@ const ContactSection = () => {
     { name: "GitHub", url: "https://github.com/nsshan98/", color: "bg-gray-800" },
   ];
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+ const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const form = e.currentTarget;
-    console.log(form);
-    
+    setLoading(true);
 
-    emailjs
-      .send(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID as string,
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID as string,
+    try {
+      // Send to YOU
+      // await emailjs.send(
+      //   "your_service_id",
+      //   "your_template_to_me",
+      //   {
+      //     user_name: formData.name,
+      //     user_email: formData.email,
+      //     subject: formData.subject,
+      //     message: formData.message,
+      //   },
+      //   "your_public_key"
+      // );
+
+      // Auto-reply to USER
+      await emailjs.send(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+  process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
         {
-          first_name: (form.elements.namedItem("first_name") as HTMLInputElement).value,
-          last_name: (form.elements.namedItem("last_name") as HTMLInputElement).value,
-          user_email: (form.elements.namedItem("user_email") as HTMLInputElement).value,
-          subject: (form.elements.namedItem("subject") as HTMLInputElement).value,
-          message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
+          user_name: formData.name,
+          user_email: formData.email, // recipient is the user
         },
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY as string
-      )
-      .then(
-        () => {
-          setStatus("✅ Message sent successfully!");
-          form.reset();
-        },
-        (error) => {
-          console.error(error);          
-          setStatus("❌ Failed to send. Please try again.");
-        }
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
       );
+
+      toast("✅ Message sent successfully!");
+      setFormData({ name: "", email: "", subject: "", message: "" });
+    } catch (error) {
+      console.error("FAILED...", error);
+      toast("❌ Something went wrong. Try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -251,7 +267,7 @@ const ContactSection = () => {
                   ></textarea>
                 </div>
 
-                <Button type="submit" size="lg" className="w-full bg-cyan-500 hover:bg-cyan-600 text-white">
+                <Button disabled={loading} type="submit" size="lg" className="w-full bg-cyan-500 hover:bg-cyan-600 text-white">
                   <Send className="w-5 h-5 mr-2" />
                   Send Message
                 </Button>
