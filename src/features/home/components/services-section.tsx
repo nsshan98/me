@@ -97,7 +97,7 @@ export default function ServicesSection() {
             </div>
             <div className="text-left">
               <h4 className="font-semibold text-white">Ready to start your project?</h4>
-              <p className="text-white text-sm">Let's discuss how I can help bring your ideas to life</p>
+              <p className="text-white text-sm">Let&apos;s discuss how I can help bring your ideas to life</p>
             </div>
           </div>
           </Link>
