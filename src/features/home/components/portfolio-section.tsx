@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { ExternalLink} from "lucide-react";
+import { ExternalLink, Github } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -14,6 +14,23 @@ const projects = [
     technologies: ["Next.js", " React Hook Form", "Zod", "Material UI"],
     image: "/bikroy+.png",
     externalLink: "https://bikroyplus.com/",
+  },
+  {
+    id: 2,
+    title: "Next.js Starter",
+    subTitle: "A modern foundation for your next web app.",
+    description:
+      "A minimal and flexible Next.js template with TypeScript, Tailwind CSS, Shadcn, Material UI and a focus on developer experience.",
+    technologies: [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "Shadcn",
+      "Material UI",
+    ],
+    image: "/nextjs-starter.png",
+    externalLink: "https://github.com/nsshan98/create-my-next-starter",
+    githubLink: "https://github.com/nsshan98/create-my-next-starter",
   },
 ];
 
@@ -39,7 +56,7 @@ export default function PortfolioSection() {
         </div>
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-1 gap-8 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
           {projects.map((project) => (
             <div
               key={project.id}
@@ -76,6 +93,16 @@ export default function PortfolioSection() {
                         <ExternalLink className="h-4 w-4" />
                       </Link>
                     </Button>
+                    {project.githubLink && (
+                      <Button
+                        size="icon"
+                        className="bg-white/90 hover:bg-white text-gray-800 h-8 w-8"
+                      >
+                        <Link href={project.externalLink} target="_blank">
+                          <Github className="h-4 w-4" />
+                        </Link>
+                      </Button>
+                    )}
                   </div>
                 </div>
               </div>

@@ -1,11 +1,12 @@
-import AboutSection from "@/features/home/components/about-section";
-import ContactSection from "@/features/home/components/contact-section";
-import EducationSection from "@/features/home/components/eduction-section";
-import ExperienceSection from "@/features/home/components/experience-section";
-import FooterSection from "@/features/home/components/footer-section";
 import HeroSection from "@/features/home/components/hero-section";
-import PortfolioSection from "@/features/home/components/portfolio-section";
+import AboutSection from "@/features/home/components/about-section";
 import SkillsSection from "@/features/home/components/skills-section";
+import ServicesSection from "@/features/home/components/services-section";
+import PortfolioSection from "@/features/home/components/portfolio-section";
+import ExperienceSection from "@/features/home/components/experience-section";
+import EducationSection from "@/features/home/components/eduction-section";
+import ContactSection from "@/features/home/components/contact-section";
+import Footer from "@/components/shared/footer";
 
 
 
@@ -26,11 +27,12 @@ export default function Home() {
         <HeroSection />
         <AboutSection />
         <SkillsSection />
+        <ServicesSection/>
         <PortfolioSection />
         <ExperienceSection />
         <EducationSection />
         <ContactSection />
-        <FooterSection />
+        <Footer />
       </div>
     </div>
   );

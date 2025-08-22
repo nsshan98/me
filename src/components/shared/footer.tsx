@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Heart, ArrowUp, Coffee } from "lucide-react";
 
-const FooterSection = () => {
+const Footer = () => {
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -30,7 +30,7 @@ const FooterSection = () => {
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="flex-1 px-4 py-3 rounded-lg border border-slate-600 bg-slate-800/50 text-white placeholder-slate-400 focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-300"
+                className="flex-1 px-4 rounded-lg border border-slate-600 bg-slate-800/50 text-white placeholder-slate-400 focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-300"
               />
               <Button className="px-6 bg-cyan-600 hover:bg-cyan-700 text-white transition-all duration-300 hover:scale-105">
                 Subscribe
@@ -73,4 +73,4 @@ const FooterSection = () => {
   );
 };
 
-export default FooterSection;
+export default Footer;

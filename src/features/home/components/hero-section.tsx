@@ -15,11 +15,11 @@ const HeroSection = () => {
         <div
           className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-full blur-3xl animate-pulse"
           style={{ animationDelay: "1s" }}
-        ></div>
+        />
         <div
           className="absolute top-1/2 left-1/4 w-48 h-48 bg-gradient-to-r from-teal-500/15 to-cyan-500/15 rounded-full blur-2xl animate-pulse"
           style={{ animationDelay: "2s" }}
-        ></div>
+        />
       </div>
 
       <Navbar />
@@ -85,6 +85,7 @@ const HeroSection = () => {
                     alt="Me"
                     width={300}
                     height={300}
+                    priority
                     className="w-75 h-75 object-cover rounded-full"
                   />
                 </div>
