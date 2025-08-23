@@ -29,7 +29,7 @@ const projects = [
       "Material UI",
     ],
     image: "/nextjs-starter.png",
-    externalLink: "https://github.com/nsshan98/create-my-next-starter",
+    externalLink: "https://www.npmjs.com/package/create-my-next-starter",
     githubLink: "https://github.com/nsshan98/create-my-next-starter",
   },
 ];
